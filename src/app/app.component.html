@@ -1,0 +1,28 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser;else elseBlock">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/">Home</a>
+      <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+<ng-template #elseBlock>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" routerLink="/registration">Registration</a>
+    </div>
+  </nav>
+</ng-template>
+
+
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <router-outlet></router-outlet>
+          </div>
+      </div>
+  </div>
+</div>
