@@ -26,6 +26,7 @@ export class HomeComponent {
         return this.currentUser && this.currentUser.role === Role.Admin;
     }
     UserGetById() {
+        console.log('test');
         this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
             this.userFromApi = user;
         });
