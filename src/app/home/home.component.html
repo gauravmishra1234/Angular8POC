@@ -7,3 +7,29 @@
         <li *ngIf="userFromApi">{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
     </ul>
 </div>
+<p *ngIf="!allUser && isAdmin"><em>Loading...</em></p>
+<table class='table' *ngIf="allUser && isAdmin">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>Role</th>
+        <!-- <th>Edit</th>
+        <th>Delete</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of allUser">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.password}}</td>
+        <td>{{ user.firstName }} {{ user.lastName}}</td>
+        <td>{{user.roleId==1? 'Admin':'User'}}</td>
+        <!-- <td><button type="button" class="btn btn-info" (click)="loadEmployeeToEdit(employee.EmpId)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteEmployee(employee.EmpId)">Delete</button></td> -->
+      </tr>
+    </tbody>
+  </table>
+  
