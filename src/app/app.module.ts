@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {RouterModule} from '@angular/router'
-
+import { FormsModule } from '@angular/forms';
 // used to create fake backend
 
 
@@ -30,7 +30,8 @@ import { RegistrationComponent } from './registration/registration.component';
         ReactiveFormsModule,
         HttpClientModule,
         RouterModule.forRoot([]),
-        routing
+        routing,
+        FormsModule
     ],
     declarations: [
         AppComponent,

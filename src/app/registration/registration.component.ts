@@ -30,7 +30,6 @@ export class RegistrationComponent implements OnInit {
     this.CreateRegistration(user);
   }
   CreateRegistration(user: User) {
-    debugger;
     this.userService.InsertRegistration(user).subscribe(
       () => {
         this.dataSaved = true;

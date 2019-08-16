@@ -11,6 +11,8 @@ export class HomeComponent {
     currentUser: User;
     userFromApi: User;
     allUser: User[];
+    massage = null;
+    dataSaved = false;
     constructor(
         private userService: UserService,
         private authenticationService: AuthenticationService
@@ -33,10 +35,26 @@ export class HomeComponent {
     }
 
     loadAllUser() {
-        debugger;
         if (this.isAdmin == true) {
             this.userService.getAll().subscribe(user => {
                 this.allUser = user;
+            });
+        }
+    }
+    UserToEdit(user: User) {
+        this.userService.updateUser(user).subscribe(
+            () => {
+                this.dataSaved = true;
+                this.massage = "Record Update Successfully";
+            }
+        );
+    }
+    deleteUser(id: number, username: string) {
+        if (confirm("Are you sure you want to delete " + username)) {
+            this.userService.deleteUserById(id).subscribe(() => {
+                this.dataSaved = true;
+                this.massage = 'Record Deleted Succefully';
+                this.loadAllUser();
             });
         }
     }
