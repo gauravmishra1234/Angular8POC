@@ -31,6 +31,7 @@ export class HomeComponent {
     }
     get isAdmin() {
         return this.currentUser && this.currentUser.role === Role.Admin;
+        debugger;
     }
     UserGetById() {
         this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {

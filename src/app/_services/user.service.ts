@@ -28,6 +28,7 @@ export class UserService {
             .pipe(map(user => {
                 JSON.stringify(user)
                 return user;
+                debugger;
             }));
     }
     deleteUserById(id: number) {
