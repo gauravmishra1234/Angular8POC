@@ -11,43 +11,48 @@
 <div *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
   {{massage}}
 </div>
-<table class='table' *ngIf="allUser && isAdmin">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>User Name</th>
-      <th>Password</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Role</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of allUser">
-      <td>{{ user.id }}</td>
-      <!-- <td>{{ user.username }}</td>
-        <td>{{ user.password}}</td>
-        <td>{{ user.firstName }} {{ user.lastName}}</td>
-        <td>{{user.roleId==1? 'Admin':'User'}}</td> -->
-      <td> <input type="text" [(ngModel)]="user.username" [disabled]="!user.isEditable" /></td>
-      <td> <input type="text" [(ngModel)]="user.password" [disabled]="!user.isEditable" /></td>
-      <td> <input type="text" [(ngModel)]="user.firstName" [disabled]="!user.isEditable" /></td>
-      <td> <input type="text" [(ngModel)]="user.lastName" [disabled]="!user.isEditable" /></td>
-      <!-- <td> <input type="text" [(ngModel)]="user.roleId" [disabled]="!user.isEditable" /></td> -->
-      <td>
-        <select  [(ngModel)]="user.roleId" [disabled]="!user.isEditable" required>
-            <option value="">-- Select Role --</option>
-            <option value="1">Admin</option>
-            <option value="2">User</option>
-        </select>
-      
-      </td>
-      <td> <button (click)="user.isEditable=!user.isEditable" *ngIf="!user.isEditable">Edit</button>
-        <button *ngIf="user.isEditable" (click)="UserToEdit(user)"
-          (click)="user.isEditable=!user.isEditable">Save</button></td>
-      <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id,user.username)">Delete</button></td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="allUser && isAdmin">
+  <div id="scroller" ngxInfiniteScroller strategy="scrollingToBottom" (onScrollDown)="onScrollDown()">
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User Name</th>
+          <th>Password</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Role</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of allUser">
+          <td>{{ user.id }}</td>
+          <!-- <td>{{ user.username }}</td>
+              <td>{{ user.password}}</td>
+              <td>{{ user.firstName }} {{ user.lastName}}</td>
+              <td>{{user.roleId==1? 'Admin':'User'}}</td> -->
+          <td> <input type="text" [(ngModel)]="user.username" [disabled]="!user.isEditable" /></td>
+          <td> <input type="text" [(ngModel)]="user.password" [disabled]="!user.isEditable" /></td>
+          <td> <input type="text" [(ngModel)]="user.firstName" [disabled]="!user.isEditable" /></td>
+          <td> <input type="text" [(ngModel)]="user.lastName" [disabled]="!user.isEditable" /></td>
+          <!-- <td> <input type="text" [(ngModel)]="user.roleId" [disabled]="!user.isEditable" /></td> -->
+          <td>
+            <select [(ngModel)]="user.roleId" [disabled]="!user.isEditable" required>
+              <option value="">-- Select Role --</option>
+              <option value="1">Admin</option>
+              <option value="2">User</option>
+            </select>
+
+          </td>
+          <td> <button (click)="user.isEditable=!user.isEditable" *ngIf="!user.isEditable">Edit</button>
+            <button *ngIf="user.isEditable" (click)="UserToEdit(user)"
+              (click)="user.isEditable=!user.isEditable">Save</button></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id,user.username)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

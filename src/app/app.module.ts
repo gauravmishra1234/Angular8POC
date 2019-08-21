@@ -1,9 +1,10 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule }    from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {RouterModule} from '@angular/router'
+import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms';
+import { NgxInfiniteScrollerModule } from 'ngx-infinite-scroller';
 // used to create fake backend
 
 
@@ -31,7 +32,8 @@ import { RegistrationComponent } from './registration/registration.component';
         HttpClientModule,
         RouterModule.forRoot([]),
         routing,
-        FormsModule
+        FormsModule,
+        NgxInfiniteScrollerModule
     ],
     declarations: [
         AppComponent,
@@ -43,9 +45,8 @@ import { RegistrationComponent } from './registration/registration.component';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
         // provider used to create fake backend
-       
+
     ],
     bootstrap: [AppComponent]
 })

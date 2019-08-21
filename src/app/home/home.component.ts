@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { User } from '../_models/user';
+import { User} from '../_models/user';
 import { UserService } from '../_services/user.service';
 import { AuthenticationService } from '../_services/authentication.service';
-import { Observable } from 'rxjs';
 import { Role } from '../_models/role';
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({
+    templateUrl: 'home.component.html',
+    styleUrls: ['./home.component.css']
+})
 export class HomeComponent {
     currentUser: User;
     userFromApi: User;
-    allUser: User[];
+    allUser: User[] = [];
     massage = null;
     dataSaved = false;
+
+    pageNum = 1;
+
     constructor(
         private userService: UserService,
         private authenticationService: AuthenticationService
@@ -28,16 +33,16 @@ export class HomeComponent {
         return this.currentUser && this.currentUser.role === Role.Admin;
     }
     UserGetById() {
-        console.log('test');
         this.userService.getById(this.currentUser.id).pipe(first()).subscribe(user => {
             this.userFromApi = user;
         });
     }
 
-    loadAllUser() {
+    loadAllUser(pageNum = 1) {
         if (this.isAdmin == true) {
-            this.userService.getAll().subscribe(user => {
-                this.allUser = user;
+            this.userService.getAll(pageNum).subscribe(user => {
+                this.allUser = this.allUser.concat(user);
+                debugger;
             });
         }
     }
@@ -57,5 +62,9 @@ export class HomeComponent {
                 this.loadAllUser();
             });
         }
+    }
+    public onScrollDown() {
+        this.pageNum++;
+        this.loadAllUser(this.pageNum);
     }
 }
