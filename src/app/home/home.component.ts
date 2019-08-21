@@ -42,7 +42,6 @@ export class HomeComponent {
         if (this.isAdmin == true) {
             this.userService.getAll(pageNum).subscribe(user => {
                 this.allUser = this.allUser.concat(user);
-                debugger;
             });
         }
     }
